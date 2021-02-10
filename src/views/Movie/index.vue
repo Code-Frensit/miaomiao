@@ -4,7 +4,7 @@
             <div id="content">
                 <div class="movie_menu">
                         <router-link tag="div" to="/movie/city" class="city_name">
-                            <span>大连</span><i class="iconfont icon-lower-triangle"></i>
+                            <span>{{ $store.state.city.name }}</span><i class="iconfont icon-lower-triangle"></i>
                         </router-link>
                         <div class="hot_swtich">
                             <router-link tag="div" to="/movie/nowPlaying" class="hot_item">正在热映</router-link>
@@ -25,11 +25,55 @@
 <script>
 import Header from '@/components/Header';
 import TabBar from '@/components/TabBar';
+import { messageBox } from '@/components/JS'
 export default {
     name : 'Movie',
     components : {
         Header,
         TabBar
+    },
+    mounted(){//http://api.map.baidu.com/location/ip?ak=pKghccYVNR1w51brG4he7GGl0iYa5eBe&ip=&coor=bd09ll
+    // WjxAmSP8lVt2tAOfdInmZM32gYaPw7zq
+    // http://api.map.baidu.com/location/ip?ak=WjxAmSP8lVt2tAOfdInmZM32gYaPw7zq&ip=&coor=bd09ll
+
+         setTimeout(()=>{
+                // this.$axios.get('/location/ip?ak=pKghccYVNR1w51brG4he7GGl0iYa5eBe&ip=&coor=').then((res)=>{
+                    // this.$axios.get('http://ip-api.com/json').then((res)=>{
+                    this.$axios.get('http://localhost:8080/ceshi.json').then((res)=>{
+                        // var myObj =  JSON.parse(res);
+                    // console.log(res.data.content.address);
+                    // var msg = res.data;
+                    // console.log(res.data.content.address_detail.city_code);
+                    var nm = res.data.content.address;
+                    var id = res.data.content.address_detail.city_code;
+                    if( this.$store.state.city.id == id ){return;}
+                            messageBox({
+                            title : '定位',
+                            content : nm,
+                            cancel : '取消',
+                            ok : '切换定位',
+                            handlOk(){
+                                // console.log(2);
+                                window.localStorage.setItem('nowNm',nm);
+                                window.localStorage.setItem('nowId',id);
+                                window.location.reload();
+                            }
+                        });
+                    
+                });
+          },500);
+        // messageBox({
+        //     title : '定位',
+        //     content : '沈阳',
+        //     cancel : '取消',
+        //     ok : '切换定位',
+        //     handleCancel(){
+        //         console.log(1);
+        //     },
+        //     handlOk(){
+        //         console.log(2);
+        //     }
+        // });
     }
 }
 </script>
