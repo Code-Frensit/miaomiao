@@ -1,5 +1,6 @@
 <template>
   <div class="cinema_body">
+	  <Scroller>
 				<ul>
 					<li v-for="item in cinemaList" :key="item.id">
 						<div>
@@ -16,6 +17,7 @@
        					</div>
 					</li>
 				</ul>
+				</Scroller>
 			</div>
 </template>
 
