@@ -4,10 +4,10 @@
 	             <Scroller v-else :handleToScroll="handleToScroll" :handleTouchEnd="handleTouchEnd">
 							<ul>
 								<li class="movie_li">{{pullDownMsg}}</li>
-								<li v-for="item in movieList" :key="item.filmId" @tap="handleToDetail">
-									<div class="pic_show" ><img :src="item.poster"></div>
+								<li v-for="item in movieList" :key="item.filmId">
+									<div class="pic_show" @tap="handleToDetail(item.filmId)"><img :src="item.poster"></div>
 									<div class="info_list">
-										<h2>{{item.name}}</h2>
+										<h2  @tap="handleToDetail(item.filmId)">{{item.name}}</h2>
 										<p>观众评 <span class="grade">9.2</span></p>
 										<p>主演: 陈建斌,任素汐,潘斌龙</p>
 										<p>今天55家影院放映607场</p>
@@ -70,8 +70,9 @@ export default {
 		})
 	},
 	methods : {
-		handleToDetail(){
-			console.log('handleToDetail');
+		handleToDetail(movieId){
+			// console.log(movieId);
+			this.$router.push('/movie/detail/1/' + movieId);
 		},
 		handleToScroll(pos){
 			if( pos.y > 30){
