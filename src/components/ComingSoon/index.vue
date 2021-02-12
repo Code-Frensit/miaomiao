@@ -3,9 +3,9 @@
 		<Scroller>
 					<ul>
 						<li v-for="item in coming" :key="item.id">
-							<div class="pic_show"><img :src="item.img | setWH('128.180')"></div>
+							<div class="pic_show" @tap="handleToDetail(item.filmId)"><img :src="item.img | setWH('128.180')"></div>
 								<div class="info_list">
-									<h2>{{item.nm}}</h2>
+									<h2 @tap="handleToDetail(item.filmId)">{{item.nm}}</h2>
 									<p><span class="person">{{item.wish}}</span> 人想看</p>
 									<p>主演: {{item.star}}</p>
 									<p>{{item.rt}}上映</p>
@@ -38,6 +38,11 @@ export default {
 			console.log(res.data.coming);
 			this.coming = res.data.coming;
 		})
+	},
+	methods : {
+		handleToDetail(movieId){
+			this.$router.push('/movie/detail/2/' + movieId);
+		}
 	}
 }
 </script>

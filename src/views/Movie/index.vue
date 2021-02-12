@@ -19,6 +19,7 @@
                     </keep-alive>
             </div>
       <TabBar />
+      <router-view name="detail"></router-view>
   </div>
 </template>
 
@@ -37,9 +38,10 @@ export default {
     // http://api.map.baidu.com/location/ip?ak=WjxAmSP8lVt2tAOfdInmZM32gYaPw7zq&ip=&coor=bd09ll
 
          setTimeout(()=>{
-                // this.$axios.get('/location/ip?ak=pKghccYVNR1w51brG4he7GGl0iYa5eBe&ip=&coor=').then((res)=>{
+                // this.$axios.get('/location/ip?ak=pKghccYVNR1w51brG4he7GGl0iYa5eBe&ip=&coor=').then((res)=>{ http://localhost:8080/ceshi.json
                     // this.$axios.get('http://ip-api.com/json').then((res)=>{
                     this.$axios.get('http://localhost:8080/ceshi.json').then((res)=>{
+                        // console.log(res)
                         // var myObj =  JSON.parse(res);
                     // console.log(res.data.content.address);
                     // var msg = res.data;
